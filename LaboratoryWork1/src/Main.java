@@ -5,7 +5,6 @@ import domain.*;
 import factory.*;
 import singleton.*;
 
-cd
 public class Main {
     public static void main(String[] args) {
         // Get hospital system instance
@@ -22,7 +21,7 @@ public class Main {
 
         // Create patient using factory
         InsuranceInfo insurance = new InsuranceInfo("POL123", "HealthCare Inc", "2025-12-31");
-        Patient patient = PatientFactory.createPatient("John Doe", 35, "1234567890", insurance);
+        Patient patient = PatientFactory.createPatient("Stratan Maria", 35, "0687908769", insurance);
         hospitalSystem.addPatient(patient);
 
         // Schedule appointment
