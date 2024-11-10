@@ -2,8 +2,9 @@ package domain.facade;
 
 import domain.builder.ReportBuilder;
 import domain.models.patient.Patient;
-import domain.models.appointment.Appointment;
+import domain.models.appointment.IAppointment;
 import util.singleton.HospitalSystem;
+import java.util.List;
 
 public class MedicalRecordFacade {
     private final HospitalSystem hospitalSystem;
@@ -38,8 +39,8 @@ public class MedicalRecordFacade {
                 .addHeader("Appointment History")
                 .addPatientInfo(patient);
 
-        // Add appointment history
-        for (Appointment appointment : hospitalSystem.getPatientAppointments(patientId)) {
+        List<IAppointment> appointments = hospitalSystem.getPatientAppointments(patientId);
+        for (IAppointment appointment : appointments) {
             builder.addAppointmentInfo(appointment);
         }
 

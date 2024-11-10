@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Laboratory Work 0/Laboratory Work 0.iml" filepath="$PROJECT_DIR$/Laboratory Work 0/Laboratory Work 0.iml" />
       <module fileurl="file://$PROJECT_DIR$/LaboratoryWork1/Laboratory Work 1.iml" filepath="$PROJECT_DIR$/LaboratoryWork1/Laboratory Work 1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LaboratoryWork2/LaboratoryWork2.iml" filepath="$PROJECT_DIR$/LaboratoryWork2/LaboratoryWork2.iml" />
       <module fileurl="file://$PROJECT_DIR$/TMPS-LABS.iml" filepath="$PROJECT_DIR$/TMPS-LABS.iml" />
       <module fileurl="file://$PROJECT_DIR$/Laboratory Work 0/makeup/service/application/application.iml" filepath="$PROJECT_DIR$/Laboratory Work 0/makeup/service/application/application.iml" />
       <module fileurl="file://$PROJECT_DIR$/Laboratory Work 0/makeup/service/service.iml" filepath="$PROJECT_DIR$/Laboratory Work 0/makeup/service/service.iml" />

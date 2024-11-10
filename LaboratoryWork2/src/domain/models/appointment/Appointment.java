@@ -16,18 +16,33 @@ public class Appointment implements IAppointment {
     }
 
     @Override
-    public String getAppointmentId() { return appointmentId; }
+    public String getAppointmentId() {
+        return appointmentId;
+    }
 
     @Override
-    public String getPatientId() { return patientId; }
+    public String getPatientId() {
+        return patientId;
+    }
 
     @Override
-    public String getDoctorId() { return doctorId; }
+    public String getDoctorId() {
+        return doctorId;
+    }
 
     @Override
-    public String getDateTime() { return dateTime; }
+    public String getDateTime() {
+        return dateTime;
+    }
 
-    public AppointmentStatus getStatus() { return status; }
+    @Override
+    public AppointmentStatus getStatus() {
+        return status;
+    }
 
-    public void setStatus(AppointmentStatus status) { this.status = status; }
+    @Override
+    public void setStatus(AppointmentStatus status) {
+        this.status = status;
+    }
 }
+

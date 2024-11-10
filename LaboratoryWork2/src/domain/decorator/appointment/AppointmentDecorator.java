@@ -2,6 +2,8 @@ package domain.decorator.appointment;
 
 import domain.models.appointment.IAppointment;
 
+import java.time.LocalDateTime;
+
 public abstract class AppointmentDecorator implements IAppointment {
     protected IAppointment appointment;
 

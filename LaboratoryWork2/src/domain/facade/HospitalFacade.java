@@ -5,6 +5,7 @@ import domain.factory.PatientFactory;
 import domain.models.patient.InsuranceInfo;
 import domain.models.patient.Patient;
 import domain.models.appointment.Appointment;
+import domain.models.appointment.IAppointment;
 import domain.models.staff.IStaffMember;
 import domain.decorator.appointment.EmergencyDecorator;
 import domain.bridge.notification.EmailSender;
@@ -17,6 +18,7 @@ import domain.adapter.IHealthSystemAdapter;
 import domain.adapter.LegacySystemAdapter;
 import domain.adapter.HealthAPIAdapter;
 import java.util.List;
+
 public class HospitalFacade {
     private final HospitalSystem hospitalSystem;
     private final StaffFactory staffFactory;
@@ -49,19 +51,19 @@ public class HospitalFacade {
     }
 
     public String scheduleAppointment(String patientId, String doctorId, String dateTime) {
-        Appointment appointment = new Appointment(patientId, doctorId, dateTime);
+        IAppointment appointment = new Appointment(patientId, doctorId, dateTime);
         hospitalSystem.scheduleAppointment(appointment);
         return appointment.getAppointmentId();
     }
 
     public void markAppointmentAsEmergency(String appointmentId) {
-        Appointment appointment = hospitalSystem.getAppointment(appointmentId);
+        IAppointment appointment = hospitalSystem.getAppointment(appointmentId);
         EmergencyDecorator emergencyAppointment = new EmergencyDecorator(appointment);
         hospitalSystem.updateAppointment(appointmentId, emergencyAppointment);
     }
 
     public void sendAppointmentNotification(String appointmentId, boolean urgent) {
-        Appointment appointment = hospitalSystem.getAppointment(appointmentId);
+        IAppointment appointment = hospitalSystem.getAppointment(appointmentId);
         Patient patient = hospitalSystem.getPatient(appointment.getPatientId());
 
         String details = String.format("Appointment scheduled for %s with Dr. %s",
@@ -79,24 +81,24 @@ public class HospitalFacade {
 
     public String generateReport(String patientId, String appointmentId) {
         Patient patient = hospitalSystem.getPatient(patientId);
-        Appointment appointment = hospitalSystem.getAppointment(appointmentId);
+        IAppointment appointment = hospitalSystem.getAppointment(appointmentId);
 
         return new ReportBuilder()
                 .addHeader("Patient Visit Report")
                 .addPatientInfo(patient)
                 .addAppointmentInfo(appointment)
-                .addSection("Status: " + (appointment instanceof EmergencyDecorator ? "EMERGENCY" : "Regular"))
+                .addSection("Status: " + "Regular")
                 .build();
     }
+
     public void syncWithExternalSystems(String patientId) {
         Patient patient = hospitalSystem.getPatient(patientId);
         if (patient != null) {
             legacyAdapter.exportPatientData(patient);
             apiAdapter.exportPatientData(patient);
 
-
-            List<Appointment> appointments = hospitalSystem.getPatientAppointments(patientId);
-            for (Appointment apt : appointments) {
+            List<IAppointment> appointments = hospitalSystem.getPatientAppointments(patientId);
+            for (IAppointment apt : appointments) {
                 legacyAdapter.syncAppointment(apt);
                 apiAdapter.syncAppointment(apt);
             }

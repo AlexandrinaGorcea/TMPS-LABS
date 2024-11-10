@@ -1,17 +1,17 @@
 package util.singleton;
+
 import domain.models.appointment.*;
 import domain.models.staff.*;
+import domain.models.patient.*;
 import java.util.ArrayList;
 import java.util.List;
-import domain.models.patient.*;
 import java.util.stream.Collectors;
-
 
 public class HospitalSystem {
     private static HospitalSystem instance;
     private final List<Patient> patients;
     private final List<IStaffMember> staff;
-    private final List<Appointment> appointments;
+    private final List<IAppointment> appointments;  // Changed to IAppointment
     private final Logger logger;
 
     private HospitalSystem() {
@@ -21,6 +21,7 @@ public class HospitalSystem {
         logger = Logger.getInstance();
     }
 
+
     public static synchronized HospitalSystem getInstance() {
         if (instance == null) {
             instance = new HospitalSystem();
@@ -28,26 +29,31 @@ public class HospitalSystem {
         return instance;
     }
 
+
     public void addPatient(Patient patient) {
         patients.add(patient);
         logger.log("New patient added: " + patient.getId());
     }
+
 
     public void addStaffMember(IStaffMember staffMember) {
         staff.add(staffMember);
         logger.log("New staff member added: " + staffMember.getId());
     }
 
-    public void scheduleAppointment(Appointment appointment) {
+
+    public void scheduleAppointment(IAppointment appointment) {
         appointments.add(appointment);
         logger.log("New appointment scheduled: " + appointment.getAppointmentId());
     }
-    public Appointment getAppointment(String appointmentId) {
+
+    public IAppointment getAppointment(String appointmentId) {
         return appointments.stream()
                 .filter(a -> a.getAppointmentId().equals(appointmentId))
                 .findFirst()
                 .orElse(null);
     }
+
 
     public Patient getPatient(String patientId) {
         return patients.stream()
@@ -56,6 +62,7 @@ public class HospitalSystem {
                 .orElse(null);
     }
 
+
     public IStaffMember getDoctor(String doctorId) {
         return staff.stream()
                 .filter(s -> s.getId().equals(doctorId) && s.getRole().equals("Doctor"))
@@ -63,18 +70,25 @@ public class HospitalSystem {
                 .orElse(null);
     }
 
-    public List<Appointment> getPatientAppointments(String patientId) {
+
+    public List<IAppointment> getPatientAppointments(String patientId) {  // Changed to IAppointment
         return appointments.stream()
                 .filter(a -> a.getPatientId().equals(patientId))
                 .collect(Collectors.toList());
     }
 
-    public void updateAppointment(String appointmentId, IAppointment appointment) {
-        int index = appointments.indexOf(getAppointment(appointmentId));
+
+    public void updateAppointment(String appointmentId, IAppointment appointment) {  // Changed parameter to IAppointment
+        int index = -1;
+        for (int i = 0; i < appointments.size(); i++) {
+            if (appointments.get(i).getAppointmentId().equals(appointmentId)) {
+                index = i;
+                break;
+            }
+        }
         if (index != -1) {
-            appointments.set(index, (Appointment) appointment);
+            appointments.set(index, appointment);
+            logger.log("Updated appointment: " + appointmentId);
         }
     }
-
-
 }

@@ -1,26 +1,39 @@
 package domain.models.patient;
 
 public class Patient extends AbstractPatient {
-    public Patient(String name, int age, String contactNumber, InsuranceInfo insurance) {
+    private InsuranceInfo insuranceInfo;
+
+    public Patient(String name, int age, String contactNumber) {
         super(name, age, contactNumber);
-        this.insuranceInfo = insurance;
     }
 
     @Override
-    public String getId() { return id; }
+    public String getId() {
+        return id;
+    }
 
     @Override
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     @Override
-    public int getAge() { return age; }
+    public int getAge() {
+        return age;
+    }
 
     @Override
-    public String getContactNumber() { return contactNumber; }
+    public String getContactNumber() {
+        return contactNumber;
+    }
 
     @Override
-    public InsuranceInfo getInsuranceInfo() { return insuranceInfo; }
+    public InsuranceInfo getInsuranceInfo() {  // Implement the getInsuranceInfo method
+        return insuranceInfo;
+    }
 
     @Override
-    public void setInsuranceInfo(InsuranceInfo info) { this.insuranceInfo = info; }
+    public void setInsuranceInfo(InsuranceInfo info) {  // Implement the setInsuranceInfo method
+        this.insuranceInfo = info;
+    }
 }

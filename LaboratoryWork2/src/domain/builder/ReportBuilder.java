@@ -1,34 +1,32 @@
 package domain.builder;
-import domain.models.patient.*;
-import domain.models.appointment.*;
+
+import domain.models.patient.Patient;
+import domain.models.appointment.IAppointment;
 
 public class ReportBuilder {
-    private StringBuilder report;
-
-    public ReportBuilder() {
-        this.report = new StringBuilder();
-    }
+    private StringBuilder report = new StringBuilder();
 
     public ReportBuilder addHeader(String header) {
-        report.append("=== ").append(header).append(" ===\n");
+        report.append(header).append("\n\n");
         return this;
     }
 
     public ReportBuilder addPatientInfo(Patient patient) {
-        report.append("Patient ID: ").append(patient.getId()).append("\n")
-                .append("Name: ").append(patient.getName()).append("\n")
-                .append("Contact: ").append(patient.getContactNumber()).append("\n");
+        report.append("Patient Information:\n");
+        report.append("Name: ").append(patient.getName()).append("\n");
+        report.append("ID: ").append(patient.getId()).append("\n");
         return this;
     }
 
-    public ReportBuilder addAppointmentInfo(Appointment appointment) {
-        report.append("Appointment ID: ").append(appointment.getAppointmentId()).append("\n")
-                .append("DateTime: ").append(appointment.getDateTime()).append("\n");
+    public ReportBuilder addAppointmentInfo(IAppointment appointment) {
+        report.append("Appointment Information:\n");
+        report.append("ID: ").append(appointment.getAppointmentId()).append("\n");
+        report.append("Date/Time: ").append(appointment.getDateTime()).append("\n");
         return this;
     }
 
-    public ReportBuilder addSection(String content) {
-        report.append(content).append("\n");
+    public ReportBuilder addSection(String section) {
+        report.append("\n").append(section).append("\n");
         return this;
     }
 

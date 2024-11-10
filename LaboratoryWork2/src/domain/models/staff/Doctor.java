@@ -2,7 +2,6 @@ package domain.models.staff;
 import java.util.List;
 import java.util.ArrayList;
 
-
 public class Doctor extends AbstractStaffMember {
     private final List<String> certifications;
 

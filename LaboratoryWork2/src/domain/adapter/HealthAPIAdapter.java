@@ -1,7 +1,7 @@
 package domain.adapter;
 
 import domain.models.patient.Patient;
-import domain.models.appointment.Appointment;
+import domain.models.appointment.IAppointment;
 import util.singleton.Logger;
 import java.util.List;
 import java.util.ArrayList;
@@ -21,13 +21,13 @@ public class HealthAPIAdapter implements IHealthSystemAdapter {
     }
 
     @Override
-    public List<Appointment> getExternalAppointments(String patientId) {
+    public List<IAppointment> getExternalAppointments(String patientId) {
         logger.log("Fetching appointments from Health API for patient: " + patientId);
         return new ArrayList<>();
     }
 
     @Override
-    public void syncAppointment(Appointment appointment) {
+    public void syncAppointment(IAppointment appointment) {
         logger.log("Syncing appointment to Health API: " + appointment.getAppointmentId());
     }
 }
