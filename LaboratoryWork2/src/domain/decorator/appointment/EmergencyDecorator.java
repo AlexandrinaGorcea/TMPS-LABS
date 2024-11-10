@@ -30,6 +30,7 @@ public class EmergencyDecorator implements IAppointment {
         return appointment.getDateTime();
     }
 
+
     @Override
     public AppointmentStatus getStatus() {
         return appointment.getStatus();

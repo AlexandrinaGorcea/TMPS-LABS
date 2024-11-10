@@ -79,6 +79,7 @@ public class HospitalFacade {
         }
     }
 
+
     public String generateReport(String patientId, String appointmentId) {
         Patient patient = hospitalSystem.getPatient(patientId);
         IAppointment appointment = hospitalSystem.getAppointment(appointmentId);
