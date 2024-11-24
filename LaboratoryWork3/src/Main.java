@@ -3,7 +3,7 @@ import domain.models.patient.InsuranceInfo;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Starting Enhanced Hospital Management System Test...\n");
+        System.out.println("Hospital Management System\n");
 
         // Create facade instance
         HospitalFacade hospitalFacade = new HospitalFacade();
